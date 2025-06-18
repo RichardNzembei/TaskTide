@@ -7,11 +7,14 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+
+      // ✅ Exclude favicon.svg to avoid precache crash
       includeAssets: [
-        'favicon.svg',
         'robots.txt',
         'apple-touch-icon.png',
+        'favicon.ico',
       ],
+
       manifest: {
         name: 'TaskTide',
         short_name: 'TaskTide',
@@ -37,6 +40,8 @@ export default defineConfig({
           },
         ],
       },
+
+      // ✅ Runtime caching strategies
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
         runtimeCaching: [
@@ -67,6 +72,8 @@ export default defineConfig({
           },
         ],
       },
+
+      // Helpful during dev for service worker debugging
       devOptions: {
         enabled: true,
       },
