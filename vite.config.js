@@ -8,11 +8,10 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
 
-      // ✅ Exclude favicon.svg to avoid precache crash
       includeAssets: [
         'robots.txt',
-        'apple-touch-icon.png',
         'favicon.ico',
+        'apple-touch-icon.png',
       ],
 
       manifest: {
@@ -41,9 +40,10 @@ export default defineConfig({
         ],
       },
 
-      // ✅ Runtime caching strategies
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // ✅ Prevent build crash
+
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -73,7 +73,6 @@ export default defineConfig({
         ],
       },
 
-      // Helpful during dev for service worker debugging
       devOptions: {
         enabled: true,
       },
