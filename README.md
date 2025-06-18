@@ -1,12 +1,86 @@
-# React + Vite
+# 🌊 TaskTide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**TaskTide** is a minimalist productivity timer that helps you ride the tides of focused work and rejuvenating breaks. Inspired by the Pomodoro technique, TaskTide empowers you with custom work/break intervals, reminders, session tracking, and PWA support — all in a sleek mobile-friendly design.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ⏱️ Customizable Work and Break Durations
+- 🔁 Auto-switch between Focus and Break Modes
+- 📊 Session Tracking (Work + Break Sessions)
+- 📱 Fully Responsive and Mobile-Friendly
+- 💾 PWA Support (Install as an App)
+- 🔔 Optional Browser Notifications (Coming Soon)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **React** (with Hooks)
+- **Vite** (lightning-fast dev server)
+- **Tailwind CSS** (utility-first styling)
+- **Vite Plugin PWA** for installable app support
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/tasktide.git
+cd tasktide
+npm install
+npm run dev
+```
+
+Visit: [http://localhost:5173](http://localhost:5173)
+
+---
+
+## 🧪 Build & Preview (PWA Mode)
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+## 📁 Folder Structure
+
+```
+tasktide/
+├── public/                 # PWA icons, manifest
+├── src/
+│   ├── Timer.jsx           # Main Timer component
+│   ├── App.jsx             # App entry
+│   ├── main.jsx            # Vite + React entry
+│   └── index.css           # Tailwind styles
+├── postcss.config.js
+├── tailwind.config.js
+├── vite.config.js
+└── README.md
+```
+
+---
+
+## 🔮 Upcoming Features
+
+- 🧘‍♂️ Ambient sounds for focus/break
+- 🔔 Desktop and Mobile Notifications
+- 📅 Daily/Weekly Productivity History
+- ☁️ Cloud Sync and Login (optional)
+
+---
+
+## 📄 License
+
+MIT License  
+Made with 💙 by [Your Name]  
+Inspired by the natural flow of deep work and restful breaks.
+
+---
+
+## 🌐 Live Demo (Optional)
+
+👉 [tasktide.netlify.app](https://tasktide.netlify.app) *(Update this if deployed)*
