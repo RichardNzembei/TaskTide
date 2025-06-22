@@ -90,4 +90,4 @@ Inspired by the natural flow of deep work and restful breaks.
 
 ## 🌐 Live Demo
 
-👉 [task-tide-t5a5.vercel.app](https://task-tide-t5a5.vercel.app)
+👉 [task-tide-t5a5.vercel.app](https://task-tide-t5a5.vercel.app/)
