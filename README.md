@@ -5,7 +5,7 @@
 ---
 ## 🖼️ App Screenshot
 
-> Upload a screenshot named `screenshot.png` in your project root or update the path below:
+> Landing page UI:
 
 ![TaskTide Screenshot](./public/ui.png)
 
