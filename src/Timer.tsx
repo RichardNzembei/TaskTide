@@ -172,6 +172,7 @@ const Timer: FC = () => {
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [state, dispatch] = useReducer(timerReducer, {
     secondsLeft: 25 * 60,
@@ -462,16 +463,23 @@ const Timer: FC = () => {
       dispatch({ type: "RESET", workMinutes });
   };
 
-  const resetHistory = () => {
-    if (window.confirm("Are you sure you want to clear the session history?")) {
-      console.log("Resetting history");
-      dispatch({ type: "RESET_HISTORY" });
-      setLocalStorage("workSessions", 0);
-      setLocalStorage("breakSessions", 0);
-      setLocalStorage("sessionLog", []);
-      toast.success("History reset!", { duration: 2000 });
-      setIsMenuOpen(false);
-    }
+  const openResetHistoryModal = () => {
+    setIsModalOpen(true);
+    setIsMenuOpen(false);
+  };
+
+  const closeResetHistoryModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const confirmResetHistory = () => {
+    console.log("Resetting history");
+    dispatch({ type: "RESET_HISTORY" });
+    setLocalStorage("workSessions", 0);
+    setLocalStorage("breakSessions", 0);
+    setLocalStorage("sessionLog", []);
+    toast.success("History reset!", { duration: 2000 });
+    setIsModalOpen(false);
   };
 
   return (
@@ -551,7 +559,7 @@ const Timer: FC = () => {
                   {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
                 </button>
                 <button
-                  onClick={resetHistory}
+                  onClick={openResetHistoryModal}
                   className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 w-full text-left"
                 >
                   <svg
@@ -940,6 +948,34 @@ const Timer: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Reset History Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-sm w-full mx-4">
+            <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">
+              Clear Session History
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
+              Are you sure you want to clear all session history? This action cannot be undone.
+            </p>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={closeResetHistoryModal}
+                className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmResetHistory}
+                className="px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700"
+              >
+                Clear History
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <audio ref={workAudioRef} src="/sounds/notification.mp3" preload="auto" />
       <audio ref={breakAudioRef} src="/sounds/chime.mp3" preload="auto" />
