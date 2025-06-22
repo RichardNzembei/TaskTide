@@ -3,6 +3,13 @@
 **TaskTide** is a minimalist productivity timer that helps you ride the tides of focused work and rejuvenating breaks. Inspired by the Pomodoro technique, TaskTide empowers you with custom work/break intervals, reminders, session tracking, and PWA support — all in a sleek mobile-friendly design.
 
 ---
+## 🖼️ App Screenshot
+
+> Upload a screenshot named `screenshot.png` in your project root or update the path below:
+
+![TaskTide Screenshot](./public/ui.png)
+
+---
 
 ## 🚀 Features
 
@@ -76,11 +83,11 @@ tasktide/
 ## 📄 License
 
 MIT License  
-Made with 💙 by [Your Name]  
+Made with 💙 by [Reuben Nzembei]  
 Inspired by the natural flow of deep work and restful breaks.
 
 ---
 
-## 🌐 Live Demo (Optional)
+## 🌐 Live Demo
 
-👉 [tasktide.netlify.app](https://tasktide.netlify.app) *(Update this if deployed)*
+👉 [task-tide-t5a5.vercel.app](https://task-tide-t5a5.vercel.app)
