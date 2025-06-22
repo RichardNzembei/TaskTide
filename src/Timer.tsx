@@ -84,7 +84,7 @@ const timerReducer = (state: TimerState, action: TimerAction): TimerState => {
       return {
         ...state,
         isRunning: !state.isRunning,
-        message: action.isBreak ? "Break time! ☕" : "Focus time! 🧠",
+        message: action.isBreak ? "Break time! ☕" : "Lock In time! 🧠",
       };
     case "STOP":
       return { ...state, isRunning: false };
