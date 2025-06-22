@@ -171,6 +171,7 @@ const Timer: FC = () => {
   const [autoStart, setAutoStart] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const [state, dispatch] = useReducer(timerReducer, {
     secondsLeft: 25 * 60,
@@ -235,14 +236,36 @@ const Timer: FC = () => {
 
   // Theme initialization
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (
-      theme === "dark" ||
-      (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
+    const storedTheme = localStorage.getItem("theme");
+    console.log("Initializing theme from localStorage:", storedTheme);
+    let initialTheme: "light" | "dark" = "light";
+
+    if (storedTheme === "dark" || storedTheme === "light") {
+      initialTheme = storedTheme;
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      initialTheme = "dark";
     }
+
+    setTheme(initialTheme);
+    if (initialTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    setLocalStorage("theme", initialTheme);
+    console.log("Applied theme:", initialTheme);
   }, []);
+
+  // Sync theme changes to document
+  useEffect(() => {
+    console.log("Syncing theme to document:", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    setLocalStorage("theme", theme);
+  }, [theme]);
 
   // Timer countdown logic
   useEffect(() => {
@@ -405,13 +428,12 @@ const Timer: FC = () => {
   }, [workMinutes]);
 
   const toggleDarkMode = useCallback(() => {
-    document.documentElement.classList.toggle("dark");
-    setLocalStorage(
-      "theme",
-      document.documentElement.classList.contains("dark") ? "dark" : "light"
-    );
+    console.log("Toggling theme from:", theme);
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
     setIsMenuOpen(false);
-  }, []);
+    console.log("New theme:", newTheme);
+  }, [theme]);
 
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
@@ -506,7 +528,7 @@ const Timer: FC = () => {
                       d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                     />
                   </svg>
-                  Toggle Theme
+                  {theme === "dark" ? "Light Theme" : "Dark Theme"}
                 </button>
                 <button
                   onClick={toggleFullscreen}
@@ -744,7 +766,7 @@ const Timer: FC = () => {
               type={state.isRunning ? "text" : "number"}
               min="1"
               value={breakInput}
-              onChange={(e) => setWorkInput(e.target.value)}
+              onChange={(e) => setBreakInput(e.target.value)}
               onBlur={handleBreakInputBlur}
               className="p-2 border rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 outline-none"
               disabled={state.isRunning}
